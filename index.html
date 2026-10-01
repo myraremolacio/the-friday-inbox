@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#FFFFFF">
+<title>The Friday Inbox</title>
+<style>
+:root{
+  --bg:#F2F3FB; --eyebrow:#115D48; --page:#FFFFFF; --surface:#FFFFFF; --surface-alt:#F2F3FB; --wash:#F2F3FB;
+  --ink:#000B6E; --text:#333333; --text-2:#4A4A4A; --muted:#686868;
+  --border:#E6E6E6; --ui-border:#5965C2;
+  --accent:#FDD600; --on-accent:#000B6E; --accent-hover:#D9B600;
+  --link:#000B6E; --focus:#000B6E;
+  --tick:#000B6E; --cross:#C5283D; --danger:#C5283D; --ok:#115D48;
+  --mail-btn:#333333; --on-mail-btn:#FFFFFF;
+  --decision-bg:#FFFFFF; --decision-border:#D9B600;
+  --verify-bg:#FFFFFF; --verify-border:#5965C2;
+  --monday-bg:#FFFFFF;
+  --overlay:rgba(0,7,63,.55);
+  --shadow:0 1px 2px rgba(0,11,110,.06),0 1px 3px rgba(0,11,110,.08);
+  --shadow-md:0 4px 12px rgba(0,11,110,.08),0 2px 4px rgba(0,11,110,.06);
+  --stripe-1:#FDD600; --stripe-2:#B79EF2; --stripe-3:#00D1FF; --stripe-4:#000B6E;
+  color-scheme:light;
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --display:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+  --radius:12px; --r-sm:8px; --r-pill:999px;
+  --ease:cubic-bezier(.2,.7,.2,1); --dur:180ms;
+  --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
+  --sal:env(safe-area-inset-left,0px); --sar:env(safe-area-inset-right,0px);
+}
+:root[data-theme="dark"]{
+  --bg:#00073F; --page:#00073F; --surface:#0B1450; --surface-alt:#131D5E; --wash:#131D5E;
+  --ink:#FFFFFF; --text:#F2F3FB; --text-2:#DBDEF2; --muted:#B9BEE6;
+  --border:#26307A; --ui-border:#7A84D6;
+  --accent:#FDD600; --on-accent:#000B6E; --accent-hover:#D9B600;
+  --link:#00D1FF; --focus:#00D1FF;
+  --tick:#00D1FF; --cross:#FF6B7A; --danger:#FF6B7A; --ok:#5BD3A8;
+  --mail-btn:#DBDEF2; --on-mail-btn:#00073F;
+  --decision-bg:#1A1E4A; --decision-border:#FDD600;
+  --verify-bg:#131D5E; --verify-border:#7A84D6;
+  --monday-bg:#0B1450; --eyebrow:#5BD3A8;
+  --overlay:rgba(0,3,25,.72);
+  --shadow:0 1px 3px rgba(0,0,0,.35);
+  --shadow-md:0 6px 18px rgba(0,0,0,.45);
+  --stripe-1:#FDD600; --stripe-2:#B79EF2; --stripe-3:#00D1FF; --stripe-4:#DBDEF2;
+  color-scheme:dark;}
+*{box-sizing:border-box;margin:0;padding:0}
+html{height:100%;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+body{font-family:var(--font);background:var(--page);color:var(--text);height:100%;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-wrap:anywhere}
+[hidden]{display:none!important}
+button,input{font-family:var(--font);font-size:inherit}
+button{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+a{color:var(--link)}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+:focus:not(:focus-visible){outline:none}
+[tabindex="-1"]:focus{outline:none}
+.screen{display:none;height:100%}
+.screen.active{display:flex;flex-direction:column}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+/* START */
+.start{overflow-y:auto;background:var(--page);padding:calc(32px + var(--sat)) calc(20px + var(--sar)) calc(32px + var(--sab)) calc(20px + var(--sal))}
+.start-inner{max-width:480px;width:100%;margin:auto;display:flex;flex-direction:column;gap:20px}
+.start-inner::before{content:"";display:block;width:56px;height:22px;margin-bottom:4px;background:
+  linear-gradient(var(--stripe-1),var(--stripe-1)) 0 0/56px 4px no-repeat,
+  linear-gradient(var(--stripe-2),var(--stripe-2)) 0 6px/46px 4px no-repeat,
+  linear-gradient(var(--stripe-3),var(--stripe-3)) 0 12px/36px 4px no-repeat,
+  linear-gradient(var(--stripe-4),var(--stripe-4)) 0 18px/26px 4px no-repeat}
+.start-time{font-family:var(--mono);font-size:14px;font-weight:500;color:var(--muted);letter-spacing:.04em}
+.start h1{font-family:var(--display);font-size:clamp(36px,10vw,56px);font-weight:800;line-height:1.02;letter-spacing:-.025em;color:var(--ink);text-wrap:balance}
+.start p{font-size:16px;color:var(--text);line-height:1.6;text-wrap:pretty}
+.theme-line{font-size:14px;font-weight:600;color:var(--ok);line-height:1.45}
+.btn-play{font-size:17px;font-weight:700;padding:14px 28px;min-height:52px;background:var(--accent);color:var(--on-accent);border:2px solid var(--accent);border-radius:var(--r-sm);cursor:pointer;width:100%;letter-spacing:.005em}
+.btn-quiet{font-size:15px;font-weight:600;padding:10px 18px;min-height:44px;background:var(--surface);color:var(--ink);border:1px solid var(--ui-border);border-radius:var(--r-sm);cursor:pointer}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.relaxed{display:flex;align-items:center;gap:10px;font-size:15px;color:var(--text);cursor:pointer;min-height:44px;padding-right:4px}
+.relaxed input{width:22px;height:22px;flex-shrink:0;accent-color:var(--accent);cursor:pointer}
+details.team{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:0 16px}
+details.team summary{cursor:pointer;font-size:15px;font-weight:600;color:var(--ink);padding:10px 0;min-height:48px;display:flex;align-items:center;list-style-position:inside}
+.team-body{display:flex;flex-direction:column;gap:16px;padding:4px 0 18px}
+.team-body label{font-size:14px;color:var(--text-2);display:flex;flex-direction:column;gap:6px}
+.team-body input{font-size:16px;min-height:48px;padding:10px 12px;border:1px solid var(--ui-border);border-radius:var(--r-sm);background:var(--page);color:var(--text);width:100%}
+.team-body input::placeholder{color:var(--muted);opacity:1}
+#codeInput{font-family:var(--mono);text-transform:uppercase;letter-spacing:2px}
+.team-note{font-size:14px;color:var(--text-2);line-height:1.55}
+.code-shown{font-family:var(--mono);font-size:28px;font-weight:600;letter-spacing:4px;color:var(--ink)}
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;background:var(--overlay);z-index:100;align-items:center;justify-content:center;padding:calc(20px + var(--sat)) calc(16px + var(--sar)) calc(20px + var(--sab)) calc(16px + var(--sal))}
+.overlay.open{display:flex}
+.modal{background:var(--surface);border-radius:var(--radius);max-width:520px;width:100%;max-height:100%;overflow-y:auto;padding:24px 20px;box-shadow:var(--shadow-md);border:1px solid var(--border)}
+.modal h2{font-family:var(--display);font-size:22px;font-weight:800;letter-spacing:-.015em;color:var(--ink);margin-bottom:14px}
+.modal p{font-size:15px;color:var(--text);margin-bottom:12px;line-height:1.6}
+.modal b{color:var(--ink)}
+.modal .btn-play{margin-top:8px}
+.key{font-family:var(--mono);font-size:12px;font-weight:600;background:var(--surface-alt);border:1px solid var(--ui-border);border-radius:4px;padding:1px 6px;color:var(--ink)}
+/* GAME */
+#gameScreen{background:var(--bg)}
+.game-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:calc(10px + var(--sat)) calc(16px + var(--sar)) 10px calc(16px + var(--sal));background:var(--surface);border-bottom:1px solid var(--border);flex-shrink:0}
+.stats{display:flex;align-items:center;gap:14px;min-width:0}
+.trust{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.trust-label{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);line-height:1.25;width:5.2em;text-align:right}
+#hearts{display:flex;flex-direction:column;padding:0 4px 0 8px;border-left:3px double var(--ui-border);min-height:58px}
+.heart{position:relative;display:block;width:22px;height:19px;font-size:0;line-height:0;color:transparent;border-bottom:1px solid var(--border)}
+.heart:last-child{border-bottom:0}
+.heart::before{content:"";position:absolute;left:8px;top:2px;width:6px;height:11px;border:solid var(--tick);border-width:0 2.5px 2.5px 0;transform:rotate(45deg)}
+.heart.lost::before,.heart.lost::after{content:"";position:absolute;left:10px;top:2px;width:2.5px;height:14px;border:0;border-radius:1px;background:var(--cross);transform:rotate(45deg)}
+.heart.lost::after{transform:rotate(-45deg)}
+.tally{display:flex;flex-direction:column;gap:1px;font-size:13px;min-width:0}
+.stat{display:flex;align-items:baseline;gap:5px;color:var(--ink)}
+.stat b{font-variant-numeric:tabular-nums}
+.stat-label{color:var(--muted)}
+.progress{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.clock{font-family:var(--mono);font-size:15px;font-weight:600;color:var(--ink);text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.clock.urgent{color:var(--danger)}
+.card-area{flex:1;overflow-y:auto;padding:12px calc(12px + var(--sar)) 20px calc(12px + var(--sal))}
+.mail{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);max-width:680px;margin:0 auto}
+.mail-head{position:relative;padding:16px 16px 14px 64px;border-bottom:1px solid var(--border)}
+.mail-head::before{content:"";position:absolute;left:16px;top:16px;width:36px;height:36px;border-radius:50%;background:
+  radial-gradient(circle at 50% 38%,var(--muted) 0 6px,transparent 6.5px),
+  radial-gradient(ellipse 12px 9px at 50% 100%,var(--muted) 0 99%,transparent 100%),
+  var(--surface-alt);border:1px solid var(--border)}
+.mail-top{display:flex;justify-content:space-between;gap:10px;align-items:baseline}
+.sender{font-size:16px;font-weight:700;color:var(--text);min-width:0}
+.received{font-size:13px;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.addr{font-family:var(--mono);font-size:12.5px;color:var(--text-2);word-break:break-all;margin-top:2px}
+.meta{font-size:13px;color:var(--muted);margin-top:4px;word-break:break-all}
+.meta span{font-family:var(--mono);font-size:12.5px;color:var(--text-2)}
+.subject{font-size:18px;font-weight:600;color:var(--text);margin:12px 0 0 -48px;line-height:1.35;text-wrap:pretty}
+.mail-body{padding:16px;font-size:16px;color:var(--text);line-height:1.65;white-space:pre-line}
+.attach{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-size:14px;color:var(--text);background:var(--surface-alt);padding:8px 12px;border-radius:var(--r-sm);border:1px solid var(--border);white-space:normal;word-break:break-all;max-width:100%}
+.linkbox{margin-top:14px;white-space:normal}
+.fake-btn{display:inline-block;font-size:15px;font-weight:600;color:var(--on-mail-btn);background:var(--mail-btn);padding:10px 18px;border-radius:6px}
+.link-dest{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:8px;word-break:break-all}
+.qr{margin-top:14px;width:104px;height:104px;background:
+  conic-gradient(from 90deg at 30% 30%,var(--text) 25%,transparent 0) 0 0/24px 24px,
+  conic-gradient(from 0deg at 70% 60%,var(--text) 25%,transparent 0) 6px 9px/18px 18px;border:6px solid var(--surface);outline:1px solid var(--border)}
+.preview-line{display:block;margin-top:14px;font-size:14px;background:var(--surface-alt);border:1px solid var(--border);border-radius:var(--r-sm);padding:10px 12px;color:var(--text);white-space:pre-line}
+.flag,.flag.safe{display:none;margin-top:16px;padding:12px 14px;background:var(--wash);border:1px solid var(--ui-border);color:var(--text);font-size:15px;line-height:1.55;border-radius:var(--r-sm);white-space:normal}
+.flag b{color:var(--ink)}
+.flag.visible{display:block}
+.verify{display:none;max-width:680px;margin:12px auto 0;background:var(--verify-bg);border:1px solid var(--verify-border);border-radius:var(--radius);padding:16px}
+.verify.open{display:block}
+.verify h3{font-family:var(--display);font-size:17px;font-weight:700;color:var(--ink);margin-bottom:12px}
+.choice{display:flex;gap:12px;width:100%;text-align:left;font-size:15px;line-height:1.5;padding:12px 14px;background:var(--surface);color:var(--text);border:1px solid var(--ui-border);border-radius:var(--r-sm);cursor:pointer;margin-bottom:10px;min-height:52px;align-items:flex-start}
+.choice:last-child{margin-bottom:0}
+.choice .k{font-family:var(--mono);font-size:12px;font-weight:600;color:var(--ink);background:var(--surface-alt);border:1px solid var(--border);border-radius:4px;min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.decision{max-width:680px;margin:0 auto;background:var(--decision-bg);border:1px solid var(--decision-border);border-radius:var(--radius);padding:20px 16px}
+.decision-kicker{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink);margin-bottom:10px}
+.decision-q{font-family:var(--display);font-size:19px;font-weight:700;color:var(--ink);line-height:1.4;margin-bottom:16px;text-wrap:pretty}
+.action-bar{padding:12px calc(16px + var(--sar)) calc(12px + var(--sab)) calc(16px + var(--sal));background:var(--surface);border-top:1px solid var(--border);flex-shrink:0}
+.actions{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;max-width:680px;margin:0 auto 12px}
+.act{font-size:15px;font-weight:600;padding:8px 4px;min-height:56px;border:1px solid var(--ui-border);border-radius:var(--r-sm);cursor:pointer;background:var(--surface);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.act .k{font-family:var(--mono);font-size:11px;color:var(--muted)}
+.tas-row{display:flex;justify-content:center}
+.tas{font-size:14px;font-weight:600;padding:10px 20px;min-height:44px;border:1px solid var(--ui-border);border-radius:var(--r-pill);background:var(--wash);color:var(--ink);cursor:pointer}
+.toast-wrap{position:fixed;bottom:calc(152px + var(--sab));left:50%;transform:translateX(-50%);z-index:50;pointer-events:none;width:calc(100% - 32px);max-width:440px}
+.toast{background:var(--surface);border:1px solid var(--ui-border);border-radius:var(--radius);box-shadow:var(--shadow-md);padding:12px 18px;font-size:15px;color:var(--text);text-align:center;opacity:0;transition:opacity var(--dur) var(--ease)}
+.toast.show{opacity:1}
+.toast.good{border-color:var(--ok);color:var(--ok);border-width:2px}
+.toast.bad{border-color:var(--danger);color:var(--danger);border-width:2px}
+/* END */
+.end{overflow-y:auto;background:var(--page);padding:calc(24px + var(--sat)) calc(20px + var(--sar)) calc(40px + var(--sab)) calc(20px + var(--sal))}
+.end-inner{max-width:640px;width:100%;margin:0 auto}
+.verdict{padding:20px 0 8px}
+.verdict-small{font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.verdict h2{font-family:var(--display);font-size:clamp(32px,9vw,48px);font-weight:800;line-height:1.04;letter-spacing:-.025em;color:var(--ink);margin:8px 0 10px;text-wrap:balance}
+.verdict-joke{font-size:17px;color:var(--text)}
+.figs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin:24px 0;padding:18px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.fig b{display:block;font-family:var(--display);font-size:clamp(24px,7vw,32px);font-weight:800;letter-spacing:-.02em;line-height:1.1;color:var(--ink);font-variant-numeric:tabular-nums}
+.fig span{display:block;font-size:13px;color:var(--muted);margin-top:4px;line-height:1.35}
+.report-line{font-size:16px;color:var(--text);line-height:1.6;margin:18px 0;text-wrap:pretty}
+.monday{background:var(--monday-bg);border-radius:var(--radius);padding:22px 18px;margin:24px 0}
+.monday h3{font-family:var(--display);font-size:20px;font-weight:800;letter-spacing:-.015em;color:var(--ink);margin-bottom:6px}
+.monday .sub{font-size:14px;color:var(--text-2);margin-bottom:16px}
+.monday ol{padding-left:22px;display:flex;flex-direction:column;gap:14px}
+.monday li{font-size:15px;line-height:1.55;color:var(--text)}
+.monday li::marker{font-weight:700;color:var(--ink)}
+.monday li b{display:block;color:var(--ink);margin-bottom:2px}
+.end h3.misses-h{font-family:var(--display);font-size:19px;font-weight:800;letter-spacing:-.01em;color:var(--ink);margin:32px 0 12px}
+.miss{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-sm);padding:16px;margin-bottom:10px}
+.miss-sub{font-size:15px;font-weight:700;color:var(--ink);margin-bottom:4px}
+.miss-act{font-size:13px;color:var(--muted);margin-bottom:8px}
+.miss-flag{font-size:14px;color:var(--danger);margin-bottom:8px}
+.miss-exp{font-size:15px;color:var(--text);line-height:1.55}
+.miss-src{font-size:12px;color:var(--muted);margin-top:8px;font-style:italic}
+.end-actions{display:flex;flex-direction:column;gap:12px;margin-top:28px}
+.challenge{background:var(--wash);border:1px solid var(--border);border-radius:var(--radius);padding:18px 16px}
+.challenge p{font-size:15px;color:var(--text);margin-bottom:14px}
+.challenge b{color:var(--ink)}
+.challenge .row .btn-quiet{flex:1 1 100%}
+.cta{display:flex;align-items:center;min-height:44px;font-size:15px;font-weight:600;color:var(--link);padding:6px 0;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+.credit{font-size:13px;color:var(--muted);margin-top:28px;padding-top:16px;border-top:1px solid var(--border);line-height:1.55}
+#shareCanvas{display:none}
+
+/* LIGHT CAROUSEL TREATMENT */
+.start-inner::before{display:none}
+.pills{display:flex;gap:10px;margin-bottom:8px}
+.pills i{display:block;height:8px;border-radius:4px;width:64px;background:#FDD600}
+.pills i:nth-child(2){width:36px;background:#B79EF2}
+.pills i:nth-child(3){width:36px;background:#115D48}
+.tile{width:68px;height:68px;border-radius:18px;background:#FDD600 url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKwAAAC1CAYAAADC6BSLAAAWfmNhQlgAABZ+anVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAFlhqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOjAzOGM0MWY5LTQzY2QtNDZlMy05ZWE5LWI5ODE2ODAzODAyNgAAAAOTanVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAAuGp1bWIAAABEanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5pbmdyZWRpZW50LnYzAAAAABhjMnNopk4P5LVhZbU1ufQ2A8nU/gAAAGxjYm9yo2lkYzpmb3JtYXRpaW1hZ2UvcG5namluc3RhbmNlSUR4LHhtcDppaWQ6YzQyNDU0ZWMtOGEyZi00YmM5LTljMWQtYmNiZTMwOWEyOTM2bHJlbGF0aW9uc2hpcGhwYXJlbnRPZgAAAeJqdW1iAAAAQWp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuYWN0aW9ucy52MgAAAAAYYzJzaPuBMja8SwIqOGQJbha/1ukAAAGZY2JvcqJnYWN0aW9uc4KiZmFjdGlvbmtjMnBhLm9wZW5lZGpwYXJhbWV0ZXJzoWtpbmdyZWRpZW50c4GiY3VybHgtc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5pbmdyZWRpZW50LnYzZGhhc2hYIBB6NaP7BECuJR32mTq6ga1081QgVW1ozYc8c+lOUNb3pGZhY3Rpb254HWNvbS5hbnRocm9waWMuY2xhdWRlLnByb3ZpZGVkanBhcmFtZXRlcnOheB9jb20uYW50aHJvcGljLm9yaWdpbi1jb25maWRlbmNlZ3Vua25vd25rZGVzY3JpcHRpb254ZkNsYXVkZSBwcm92aWRlZCB0aGlzIGZpbGUgYXQgdGhlIHJlcXVlc3Qgb2YgYSB1c2VyIGFuZCBtYXkgaGF2ZSBjcmVhdGVkIG9yIG1vZGlmaWVkIHRoZSBmaWxlIGNvbnRlbnRzLm1zb2Z0d2FyZUFnZW50oWRuYW1lZkNsYXVkZXJhbGxBY3Rpb25zSW5jbHVkZWT1AAAAyGp1bWIAAABAanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5oYXNoLmRhdGEAAAAAGGMyc2hg897vnINgD6owDoQHiFQIAAAAgGNib3KlY2FsZ2ZzaGEyNTZjcGFkTQAAAAAAAAAAAAAAAABkaGFzaFgga5LY0rK5fwNNvKgt3yE5wgg2NKw5J1TpLy2IS9ZJBK1kbmFtZW5qdW1iZiBtYW5pZmVzdGpleGNsdXNpb25zgaJlc3RhcnQYIWZsZW5ndGgZFooAAAI+anVtYgAAACdqdW1kYzJjbAARABCAAACqADibcQNjMnBhLmNsYWltLnYyAAAAAg9jYm9ypWNhbGdmc2hhMjU2aXNpZ25hdHVyZXhNc2VsZiNqdW1iZj0vYzJwYS91cm46YzJwYTowMzhjNDFmOS00M2NkLTQ2ZTMtOWVhOS1iOTgxNjgwMzgwMjYvYzJwYS5zaWduYXR1cmVqaW5zdGFuY2VJRHgseG1wOmlpZDo1ZDhkODM5Ny04ZTVlLTQxZGUtYjRiMy0xYjBhNWNmNTBkNzZyY3JlYXRlZF9hc3NlcnRpb25zg6JjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggEHo1o/sEQK4lHfaZOrqBrXTzVCBVbWjNhzxz6U5Q1veiY3VybHgqc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5hY3Rpb25zLnYyZGhhc2hYIFASLlMOcccuqTdKXKaKFxVPdALbgHPwt+9yLheljuzbomN1cmx4KXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaGFzaC5kYXRhZGhhc2hYIB8haXZRH6jvdbfoMUeSWXmjmcpNTdzyrW1/kgtICxi5dGNsYWltX2dlbmVyYXRvcl9pbmZvo2RuYW1lb0FudGhyb3BpYyBGaWxlc2d2ZXJzaW9uZTEuMC4wa3NwZWNWZXJzaW9uZTIuNC4wAAAQOGp1bWIAAAAoanVtZGMyY3MAEQAQgAAAqgA4m3EDYzJwYS5zaWduYXR1cmUAAAAQCGNib3LShFkCEqIBJhghWQIKMIICBjCCAY2gAwIBAgIUQOWgCu7COdC+uIP6BkIFPWdVEwAwCgYIKoZIzj0EAwMwSTEXMBUGA1UEChMOQW50aHJvcGljLCBQQkMxLjAsBgNVBAMTJUFudGhyb3BpYyBDb250ZW50IENyZWRlbnRpYWxzIFJvb3QgQ0EwHhcNMjYwODA3MTg0MzU2WhcNMjgwODA2MTk0MzU2WjBEMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEpMCcGA1UEAxMgQW50aHJvcGljIENsYXVkZSBDb250ZW50IFNpZ25pbmcwWTATBgcqhkjOPQIBBggqhkjOPQMBBwNCAASYegpry1AYBRTVNL1CpTlbROnY3dey+UrsF9C3phYrATN3ZHf93Mo8RQN0KOUuOn19P4oWNFWe5n2/She9N7eTo1gwVjAOBgNVHQ8BAf8EBAMCB4AwFQYDVR0lBA4wDAYKKwYBBAGD6F4CATAMBgNVHRMBAf8EAjAAMB8GA1UdIwQYMBaAFM5R4gSBTmRbI/jjxM+aPpzB11zCMAoGCCqGSM49BAMDA2cAMGQCMDFzHRSeAXrSy1WOzkbhPZ6Km2wGTmZ/2gK18k8BQGXyqz88Rdrz6CTX9flAnYNVxgIwcF9c3fVhqmJKpi+UhasNUMko69cyX6STPfta3Q8EjyzDjzoyrol46FP6VFHhvUcJoWNwYWRZDZ4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA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") center/44px no-repeat;flex-shrink:0}
+.start-time{font-family:var(--font);font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--eyebrow)}
+.theme-line{color:var(--ink);font-weight:600}
+.decision{border:1px solid var(--border);border-top:6px solid #FDD600;box-shadow:var(--shadow)}
+.decision::before{content:"";display:block;width:56px;height:56px;border-radius:16px;background:#B79EF2 url("data:image/png;base64,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") center/38px no-repeat;margin-bottom:16px}
+.decision-kicker{color:var(--eyebrow);letter-spacing:.2em}
+.verify{border:1px solid var(--border);border-top:6px solid #B79EF2;box-shadow:var(--shadow)}
+.verify h3{display:flex;align-items:center;gap:12px}
+.verify h3::before{content:"";flex-shrink:0;width:44px;height:44px;border-radius:12px;background:#ECE5FC url("data:image/png;base64,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") center/30px no-repeat}
+.end{background:var(--bg)}
+.verdict::before{content:"";display:block;width:64px;height:64px;border-radius:18px;background:#FDD600 url("data:image/png;base64,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") center/42px no-repeat;margin-bottom:20px}
+.verdict-small{color:var(--eyebrow);letter-spacing:.2em}
+.figs{gap:10px;padding:0;border:0}
+.fig{background:var(--surface);border:1px solid var(--border);border-top:6px solid #FDD600;border-radius:12px;padding:14px 12px 16px;min-width:0}
+.fig:nth-child(2){border-top-color:#B79EF2}
+.fig:nth-child(3){border-top-color:#115D48}
+.monday{border:1px solid var(--border);border-top:6px solid #115D48;box-shadow:var(--shadow)}
+.monday::before{content:"";display:block;width:52px;height:52px;border-radius:14px;background:#115D48 url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23FFFFFF%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Crect%20x%3D%228%22%20y%3D%222%22%20width%3D%228%22%20height%3D%224%22%20rx%3D%221%22%2F%3E%3Cpath%20d%3D%22M16%204h2a2%202%200%200%201%202%202v14a2%202%200%200%201-2%202H6a2%202%200%200%201-2-2V6a2%202%200%200%201%202-2h2%22%2F%3E%3Cpath%20d%3D%22m9%2014%202%202%204-4%22%2F%3E%3C%2Fsvg%3E") center/30px no-repeat;margin-bottom:16px}
+.challenge{background:var(--surface)}
+
+/* ACCENT BUTTONS */
+.act{border-width:1.5px}
+.act[data-action=open]{background:#FFF6C2;border-color:#D9B600}
+.act[data-action=delete]{background:#ECE5FC;border-color:#9C80E0}
+.act[data-action=report]{background:#D6E7E1;border-color:#115D48}
+.act[data-action=verify]{background:#D6F8FF;border-color:#00A3C7}
+.act .k{color:var(--ink);opacity:.75}
+.tas{background:#FDD600;border-color:#FDD600;color:#000B6E}
+.btn-quiet{background:#F2F3FB;border-color:#5965C2}
+.choice{border-width:1.5px}
+.choice .k{background:#FDD600;border-color:#FDD600;color:#000B6E}
+@media (hover:hover){
+  .act[data-action=open]:hover{background:#FFEE8F}
+  .act[data-action=delete]:hover{background:#DDD0FA}
+  .act[data-action=report]:hover{background:#C3DBD2}
+  .act[data-action=verify]:hover{background:#B8F1FF}
+  .tas:hover{background:#D9B600;border-color:#D9B600}
+  .btn-quiet:hover{background:#DBDEF2}
+  .choice:hover{background:#F2F3FB;border-color:#000B6E}
+}
+/* TIMER */
+.timer-strip{display:flex;align-items:center;gap:14px;padding:10px calc(16px + var(--sar)) 10px calc(16px + var(--sal));background:#FFF6C2;border-bottom:1px solid #F0DE7A;flex-shrink:0}
+.clock{display:inline-flex;align-items:center;gap:8px;font-size:24px;font-weight:700;letter-spacing:-.01em;color:#000B6E;min-width:0}
+.clock::before{content:"";width:24px;height:24px;flex-shrink:0;background:currentColor;-webkit-mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.25%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2213%22%20r%3D%228%22%2F%3E%3Cpath%20d%3D%22M12%209v4l2.5%202.5%22%2F%3E%3Cpath%20d%3D%22M9%202h6%22%2F%3E%3C%2Fsvg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23000%22%20stroke-width%3D%222.25%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2212%22%20cy%3D%2213%22%20r%3D%228%22%2F%3E%3Cpath%20d%3D%22M12%209v4l2.5%202.5%22%2F%3E%3Cpath%20d%3D%22M9%202h6%22%2F%3E%3C%2Fsvg%3E") center/contain no-repeat}
+.clock.urgent{color:#C5283D}
+.timer-strip:has(.clock.urgent){background:#FBE6E9;border-bottom-color:#E9A3AD}
+.timebar{flex:1;min-width:60px;height:10px;border-radius:5px;background:#FFFFFF;border:1px solid #D9B600;overflow:hidden}
+.timebar i{display:block;height:100%;width:100%;transform-origin:left center;background:#115D48;border-radius:5px}
+.screen.active .timebar i{animation:drain 120s linear forwards}
+body:has(#relaxedMode:checked) .timebar{display:none}
+@keyframes drain{0%{transform:scaleX(1);background:#115D48}50%{background:#115D48}75%{background:#D9B600}91.5%{background:#D9B600}92%{background:#C5283D}100%{transform:scaleX(0);background:#C5283D}}
+@keyframes urgentPulse{50%{opacity:.55}}
+@media (prefers-reduced-motion: no-preference){.clock.urgent{animation:urgentPulse 1s steps(2,jump-none) infinite}}
+@media (min-width:600px){.clock{font-size:28px}.clock::before{width:28px;height:28px}.timer-strip{padding-top:12px;padding-bottom:12px}}
+@media (min-width:600px){
+  .btn-play{width:auto;align-self:flex-start}
+  .modal .btn-play{width:100%}
+  .card-area{padding:20px}
+  .tally{flex-direction:row;align-items:baseline;gap:18px;flex-wrap:nowrap;white-space:nowrap}
+  .challenge .row .btn-quiet{flex:0 0 auto}
+  .modal{padding:28px}
+  .decision{padding:24px}
+}
+@media (hover:hover){
+  .btn-play:hover{background:var(--accent-hover);border-color:var(--accent-hover)}
+  .btn-quiet:hover,.act:hover,.choice:hover{background:var(--surface-alt)}
+  .tas:hover{background:var(--surface-alt);border-color:var(--ink)}
+  .cta:hover{text-decoration-thickness:2px}
+}
+@media (prefers-reduced-motion: no-preference){
+  .btn-play,.btn-quiet,.act,.choice,.tas{transition:background-color var(--dur) var(--ease),border-color var(--dur) var(--ease),transform 120ms var(--ease)}
+  .btn-play:active,.btn-quiet:active,.act:active,.choice:active,.tas:active{transform:scale(.98)}
+}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .screen.active .timebar i{animation:drain 120s steps(120,end) forwards!important}
+}
+@media (forced-colors: active){
+  .heart::before{border-color:CanvasText}
+  .heart.lost::before,.heart.lost::after{background:CanvasText}
+}
+</style>
+</head>
+<body>
+<div aria-live="polite" id="live" class="sr-only"></div>
+<canvas id="shareCanvas"></canvas>
+
+<!-- START -->
+<section id="startScreen" class="screen start active">
+  <div class="start-inner">
+    <div class="pills" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="tile" aria-hidden="true"></div>
+    <div class="start-time">Friday, 4:47 pm</div>
+    <h1>The Friday Inbox</h1>
+    <p>You work at Halloran Webb, a nine-person accounting practice. Twelve emails will land before 5 pm. A few are from clients and colleagues. The rest are scams, and some of them come from addresses you'd trust.</p>
+    <div class="theme-line">Cyber Security Action Month 2026: Take a second. Stay secure.</div>
+    <button class="btn-play" id="btnPlay">Play (2 minutes)</button>
+    <div class="row">
+      <button class="btn-quiet" id="btnHowTo">How to play</button>
+      <label class="relaxed"><input type="checkbox" id="relaxedMode"> Relaxed mode, no timer</label>
+    </div>
+    <details class="team" id="teamDetails">
+      <summary>Playing with your team?</summary>
+      <div class="team-body">
+        <p class="team-note">Start a round and read the code out at your team meeting. Everyone who enters it gets the same twelve emails in the same order, so you can compare opinions afterwards.</p>
+        <button class="btn-quiet" id="btnNewRound">Start a team round</button>
+        <div id="codeShownWrap" hidden><div class="team-note">Your round code</div><div class="code-shown" id="codeShown"></div></div>
+        <label>Got a code from someone? Enter it here
+          <input id="codeInput" maxlength="6" autocomplete="off" placeholder="e.g. K4XP2M">
+        </label>
+        <label>Team name for your share card (stays on this device)
+          <input id="teamInput" maxlength="40" autocomplete="off" placeholder="Tax team">
+        </label>
+      </div>
+    </details>
+  </div>
+</section>
+
+<div class="overlay" id="howTo" role="dialog" aria-modal="true" aria-labelledby="howToTitle">
+  <div class="modal">
+    <h2 id="howToTitle">How to play</h2>
+    <p>One email at a time. Pick what you'd do with it.</p>
+    <p><b>Open</b> <span class="key">O</span> if you trust it. <b>Delete</b> <span class="key">D</span> if you want it gone. You're safe, but nobody else hears about it. <b>Report</b> <span class="key">R</span> flags it, and a reported scam can be blocked for the next firm it reaches. <b>Verify</b> <span class="key">V</span> means checking with the sender before you act, and it's the right call for anything that changes where money or documents go.</p>
+    <p><b>Take a second</b> <span class="key">T</span> shows you what to look at. It costs a second of clock and nothing else.</p>
+    <p>Look at the sender's address, the reply-to line and where a link actually goes. Display names can say anything.</p>
+    <p>Three times a game you'll get a quick workplace decision instead of an email. Press <span class="key">1</span> or <span class="key">2</span>.</p>
+    <p>You start with three hearts of client trust. Opening a scam or picking the unsafe option costs one. Lose all three and the game ends early.</p>
+    <p>You finish with an audit opinion. Unqualified is the one you want.</p>
+    <button class="btn-play" id="closeHowTo">Got it</button>
+  </div>
+</div>
+
+<!-- GAME -->
+<section id="gameScreen" class="screen">
+  <div class="game-header">
+    <div class="stats">
+      <div class="trust"><span class="trust-label" aria-hidden="true">Client trust</span><span id="hearts" role="img"></span></div>
+      <div class="tally">
+        <span class="stat"><b id="score">0</b><span class="stat-label">points</span></span>
+        <span class="stat"><b id="firms">0</b><span class="stat-label">firms warned</span></span>
+        <span class="progress" id="progress"></span>
+      </div>
+    </div>
+  </div>
+  <div class="timer-strip"><div class="clock" id="clock">4:47:00 pm</div><div class="timebar" aria-hidden="true"><i></i></div></div>
+  <div class="card-area" id="cardArea"></div>
+  <div class="action-bar" id="actionBar">
+    <div class="actions">
+      <button class="act" data-action="open" aria-label="Open, shortcut O">Open <span class="k">O</span></button>
+      <button class="act" data-action="delete" aria-label="Delete, shortcut D">Delete <span class="k">D</span></button>
+      <button class="act" data-action="report" aria-label="Report, shortcut R">Report <span class="k">R</span></button>
+      <button class="act" data-action="verify" aria-label="Verify, shortcut V">Verify <span class="k">V</span></button>
+    </div>
+    <div class="tas-row"><button class="tas" id="tasBtn" aria-label="Take a second, shows what to look at, costs one second, shortcut T">Take a second (T)</button></div>
+  </div>
+</section>
+
+<!-- END -->
+<section id="endScreen" class="screen end"><div class="end-inner" id="endContent"></div></section>
+<div class="toast-wrap"><div class="toast" id="toast" role="status"></div></div>
+
+<script>
+/* ============ CONTENT ============
+   Fictional firm: Halloran Webb Accountants, hallowebb.com.au
+   Types: malicious | verify | legit. "fix" keys map to MONDAY below. */
+const FIRM = `hallowebb.com.au`;
+
+const EMAILS = [
+/* ---------- MALICIOUS ---------- */
+{ id:`e01`, type:`malicious`, time:`4:41 pm`,
+  sender:`ATO Appointments`, address:`appointments@ato-gov-services.com`,
+  subject:`Your phone appointment is confirmed: Tue 20 Oct, 10:30 am`,
+  body:`Your appointment has been booked. Open the attached document to securely access services or reschedule.`,
+  attachment:`Appointment_Details.pdf`,
+  best:`report`, fix:`report`,
+  flag:`An ATO email with an attachment, and the attachment wants you to sign in somewhere.`,
+  openResult:`The PDF opened a page that looked exactly like myGov. You typed your login in.`,
+  explanation:`The ATO says it will never email an attachment containing a link to a myGov sign-in page, or ask for your myGov login by email.`,
+  source:`ATO scam alert, July 2026` },
+
+{ id:`e02`, type:`malicious`, time:`4:43 pm`,
+  sender:`ATO Payments`, address:`noreply@atopayments-online.com`,
+  subject:`Payment update: review your income statement`,
+  body:`Your income statement has been updated. Download and review it to make sure your records are correct before lodgement.`,
+  link:{label:`View statement`, url:`https://atopayments-online.com/statement/view?ref=88213`},
+  best:`report`, fix:`devices`,
+  flag:`"View statement" downloads a file. Statements live in the ATO portal, not in a download from an email.`,
+  openResult:`The "statement" installed remote desktop software. Someone can now see your screen and move your mouse.`,
+  explanation:`The ATO's September 2026 alert says this link downloads remote desktop software that gives a scammer access to your device.`,
+  source:`ATO scam alert, September 2026` },
+
+{ id:`e03`, type:`malicious`, time:`4:38 pm`,
+  sender:`Jordan Lee`, address:`jlee.cpa.applications@gmail.com`,
+  subject:`Application: Senior Accountant role`,
+  body:`Hi,\n\nI saw the Senior Accountant role and I'd love to be considered. Eight years in public practice, mostly SMEs and trusts. My CV and portfolio are at the link below because the files were too big to attach.\n\nThanks for your time,\nJordan Lee CPA`,
+  link:{label:`View CV and portfolio`, url:`https://files-transfer-share.com/d/JLee_CV_2026`},
+  best:`report`, fix:`report`,
+  flag:`A CV you have to click through to, sent outside your careers page.`,
+  openResult:`The "portfolio" downloaded a file that ran when you opened it. That was malware, not a CV.`,
+  explanation:`In August the ATO confirmed malware aimed at tax professionals was hidden in CVs, job applications and inbound emails. Send applicants to your normal recruitment channel.`,
+  source:`ATO statement, Accountants Daily, 11 Aug 2026` },
+
+{ id:`e04`, type:`malicious`, time:`4:45 pm`,
+  sender:`Document Services`, address:`sign@docs-notice-secure.com`,
+  subject:`Notice of assessment: Declaration and Final Release`,
+  body:`A document has been prepared for your signature.\n\nPlease review and sign the Declaration and Final Release so your assessment can be finalised.`,
+  link:{label:`Review Document`, url:`https://docs-notice-secure.com/envelope/ato-release-2026`},
+  best:`report`, fix:`report`,
+  flag:`A tax document you're asked to sign through an e-signature link.`,
+  openResult:`"Review Document" went to a fake myGov page. You signed in to see the document.`,
+  explanation:`The ATO has warned about fake DocuSign-style emails with a "Declaration and Final Release" document linking to a fake myGov page. The ATO will never use DocuSign to finalise a refund.`,
+  source:`ATO scam alerts (first flagged Oct 2025, still circulating 2026)` },
+
+{ id:`e05`, type:`malicious`, time:`4:46 pm`,
+  sender:`Microsoft Teams`, address:`noreply@teams-fileshare.com`,
+  subject:`Mia shared "Q1 Workpapers" with you`,
+  body:`Mia shared a file with you.\n\nTo open it, go to the Microsoft device login page and enter this code:\n\nF7K-29Q`,
+  link:{label:`Go to device login`, url:`https://microsoft.com/devicelogin`},
+  best:`report`, fix:`location`,
+  flag:`The login page is real Microsoft. The code isn't yours. It belongs to someone else's device.`,
+  openResult:`You entered the code and approved the sign-in. Their laptop now has your mailbox, and your MFA didn't stop it.`,
+  explanation:`This is device-code phishing. You approve a genuine Microsoft sign-in, but for the attacker's device. It gets past MFA, which is why the address bar looking right proves nothing.`,
+  source:`ASD warning, 16 May 2026` },
+
+{ id:`e06`, type:`malicious`, time:`4:44 pm`,
+  sender:`IT Support`, address:`it-support@hallowebb-security.com`,
+  subject:`Action required: re-register MFA today`,
+  body:`Your multi-factor authentication registration expires at 5 pm today. Scan the code below with your phone to keep access to firm systems over the weekend.`,
+  qr:true,
+  best:`report`, fix:`devices`,
+  flag:`A QR code that moves you onto your personal phone, from a domain that isn't your firm's.`,
+  openResult:`Your phone opened a login page. The work computer would have blocked it. Your phone didn't.`,
+  explanation:`QR codes move you off the work computer and away from its protections. A real MFA change won't arrive as a surprise QR email at 4:44 on a Friday.`,
+  source:`` },
+
+{ id:`e07`, type:`malicious`, time:`4:39 pm`,
+  sender:`Priya Mehta`, address:`priya@priyamehtaconsulting.com.au`,
+  subject:`Catch up + the files you asked for`,
+  body:`Hey!\n\nGreat to chat last week. Here are the financials we talked about, all in one shared folder. Let me know if anything's missing before the meeting.\n\nPriya`,
+  link:{label:`Open shared financials`, url:`https://sharepoint-docsview.com/priya/financials`},
+  best:`report`, fix:`clients`,
+  flag:`Priya's real address, offering files you never asked for, through a link that isn't SharePoint.`,
+  openResult:`You signed in to see Priya's files. There were no files. Your login went to the same people who took over Priya's.`,
+  explanation:`Priya's own mailbox was taken over, which is why it looks genuine. Report it, then ring Priya on a number you already have so she knows. Her other contacts are getting the same email.`,
+  source:`` },
+
+{ id:`e08`, type:`malicious`, time:`4:36 pm`,
+  sender:`Xero`, address:`invoicing@xero-billing-notices.com`,
+  subject:`Invoice INV-0392 from Coastline Plumbing is overdue`,
+  body:`Invoice INV-0392 for $3,860.00 is now 14 days overdue.\n\nView and pay online to avoid a late payment fee.`,
+  link:{label:`View invoice`, url:`https://xero-billing-notices.com/inv/0392/pay`},
+  best:`report`, fix:`onelogin`,
+  flag:`The firm has never used Coastline Plumbing, and the sender domain belongs to someone other than Xero.`,
+  openResult:`The invoice page asked you to log in to Xero first. You did. So did someone in another country, ten seconds later.`,
+  explanation:`Fake invoice notices borrow the look of accounting software because accountants open those emails all day. A real invoice is already in the software. Log in the way you always do and check there.`,
+  source:`Scamwatch guidance on fake invoice and billing scams` },
+
+{ id:`e09`, type:`malicious`, time:`4:42 pm`,
+  sender:`Mail Administrator`, address:`postmaster@halloweb.com.au`,
+  subject:`3 incoming messages held: mailbox over quota`,
+  body:`Your mailbox has reached its storage limit. 3 incoming messages are being held and will be deleted at 6:00 pm.\n\nRelease them now to avoid losing client correspondence.`,
+  link:{label:`Release messages`, url:`https://halloweb.com.au/owa/release?u=you`},
+  best:`report`, fix:`onelogin`,
+  flag:`halloweb.com.au has one b. Your firm is hallowebb.com.au.`,
+  openResult:`The release page asked you to sign in again "for security". You did. Your mailbox now has a second reader.`,
+  explanation:`Lookalike versions of your own domain cost a scammer about $15 to register. Your eye fills in the missing letter. Held-mail and quota warnings are the most common excuse to make you type your password into a page you didn't go looking for.`,
+  source:`ASD guidance on recognising phishing emails` },
+
+{ id:`e10`, type:`malicious`, time:`4:40 pm`,
+  sender:`Online services for agents`, address:`notifications@ato-agentservices.com`,
+  subject:`New client nomination awaiting your approval`,
+  body:`A client has nominated your practice as their tax agent.\n\nApprove within 24 hours or the nomination will lapse.`,
+  link:{label:`Approve nomination`, url:`https://ato-agentservices.com/nominations/approve`},
+  best:`report`, fix:`location`,
+  flag:`A 24-hour deadline and an approve link, for something you'd normally handle inside the agent portal.`,
+  openResult:`You signed in to approve it. The page was fake. Whoever built it now has the login that opens every client's tax record.`,
+  explanation:`Your agent portal login is worth more to a scammer than anything else in the building. Client nominations happen inside the portal. If something there needs you, go to the portal directly and you'll find it.`,
+  source:`ATO guidance on verifying ATO contact and reporting scams` },
+
+{ id:`e11`, type:`malicious`, time:`4:35 pm`,
+  sender:`Tom Brennan`, address:`tom@brennanbeanhouse.com.au`,
+  subject:`New accountant needed, we just bought a cafe`,
+  body:`Hi there,\n\nMy partner and I settled on a cafe in Fremantle last month and the previous owner's accountant has retired. Could you take a look at the last three years and tell us what you'd charge? Everything's in the zip.\n\nCheers,\nTom`,
+  attachment:`Prior_Year_Financials_FY23-FY25.zip`,
+  best:`report`, fix:`attachments`,
+  flag:`A stranger sending you a zipped file before you've agreed to anything or spoken once.`,
+  openResult:`The zip had one file in it, and it wasn't a spreadsheet. It ran as soon as you opened it.`,
+  explanation:`The ATO confirmed in August that malware aimed at tax professionals was arriving in inbound emails as well as job applications. A real prospect will happily upload through your portal after a first call.`,
+  source:`ATO statement, Accountants Daily, 11 Aug 2026` },
+
+{ id:`e12`, type:`malicious`, time:`4:48 pm`,
+  sender:`Phone System`, address:`voicemail@cloudpbx-alerts.com`,
+  subject:`New voicemail from +61 2 9054 3318 (0:42)`,
+  body:`You have a new voicemail.\n\nDuration: 0:42\nOpen the attachment to play.`,
+  attachment:`VM_0429_play.html`,
+  best:`report`, fix:`attachments`,
+  flag:`An .html attachment. Opening it opens a web page, and voicemails don't need one.`,
+  openResult:`The "voicemail" opened a Microsoft sign-in box inside the attachment. You filled it in to hear the message.`,
+  explanation:`Voicemail lures work on accountants because you return calls. Your real phone system has its own app. An .html file in an email is a web page wearing a costume, and it usually ends at a fake login.`,
+  source:`ASD guidance on recognising phishing emails` },
+
+{ id:`e13`, type:`malicious`, time:`4:37 pm`,
+  sender:`ASIC Registry`, address:`renewals@asic-gov-registry.com`,
+  subject:`Annual review fee overdue: Halloran Webb Pty Ltd`,
+  body:`Your annual review fee was due on 28 September and remains unpaid.\n\nPay today to avoid deregistration of the company.`,
+  link:{label:`Pay annual review fee`, url:`https://asic-gov-registry.com/pay/review`},
+  best:`report`, fix:`report`,
+  flag:`The domain isn't asic.gov.au, and the deregistration threat is there to rush you.`,
+  openResult:`You paid the fee by card on a page that wasn't ASIC's. The card details went with it.`,
+  explanation:`ASIC has warned about emails pretending to be ASIC and asking for renewal payments. Check what's owed by logging in to ASIC's own site directly. Your clients get these too, and they'll forward them to you.`,
+  source:`ASIC warnings about scam emails and calls impersonating ASIC` },
+
+{ id:`e14`, type:`malicious`, time:`4:49 pm`,
+  sender:`Business Banking Security`, address:`alerts@bizbank-securecheck.com`,
+  subject:`Unusual sign-in to your business account at 4:39 pm`,
+  body:`We noticed a sign-in from a new device in Melbourne VIC.\n\nIf this wasn't you, review the activity now to lock your account.`,
+  link:{label:`Review activity`, url:`https://bizbank-securecheck.com/review?case=40091`},
+  best:`report`, fix:`report`,
+  flag:`A security alert whose only fix is to sign in through the alert.`,
+  openResult:`To "lock" the account you signed in. Now someone really has signed in from a new device.`,
+  explanation:`The fear does the work here. If you're worried about the bank account, open the banking app or type the bank's address yourself. Never use the link in the warning.`,
+  source:`Scamwatch guidance on bank impersonation scams` },
+
+{ id:`e15`, type:`malicious`, time:`4:34 pm`,
+  sender:`Accounts Payable, Ridgeway Civil`, address:`ap@ridgewaycivil-group.com`,
+  subject:`Remittance advice: payment 7731`,
+  body:`Please find attached remittance advice for payment 7731.\n\nRegards,\nAccounts Payable`,
+  attachment:`Remittance_7731.htm`,
+  best:`report`, fix:`attachments`,
+  flag:`A remittance from a company that doesn't owe you anything, as an .htm file.`,
+  openResult:`The remittance opened a login page in your browser. You entered your email password to "view the PDF".`,
+  explanation:`Fake remittances are popular because getting paid is the best news in an accountant's week. Nobody legitimate sends remittances as web pages.`,
+  source:`ASD guidance on recognising phishing emails` },
+
+{ id:`e16`, type:`malicious`, time:`4:47 pm`,
+  sender:`SignFlow`, address:`notify@signflow-docs.com`,
+  subject:`Chen Holdings has signed: FY26 Engagement Letter`,
+  body:`All parties have completed "FY26 Engagement Letter".\n\nView and download the signed document below.`,
+  link:{label:`View signed document`, url:`https://signflow-docs.com/v/8f2a1c`},
+  best:`report`, fix:`report`,
+  flag:`You never sent Chen Holdings an engagement letter. Chen Holdings isn't a client.`,
+  openResult:`"View signed document" asked for your Microsoft login. You gave it.`,
+  explanation:`Fake e-signature notices copy the documents an accounting firm actually sends. Curiosity does the rest: who's Chen Holdings, and why do they think we're engaged?`,
+  source:`ASD guidance on recognising phishing emails` },
+
+{ id:`e17`, type:`malicious`, time:`4:46 pm`,
+  sender:`Clearing House Notifications`, address:`noreply@superclearing-alerts.com`,
+  subject:`Contribution rejected: 3 employees, action required`,
+  body:`September super contributions for 3 employees were rejected by the receiving fund.\n\nUpdate the fund details within 48 hours to avoid a Super Guarantee Charge.`,
+  link:{label:`Update fund details`, url:`https://superclearing-alerts.com/employer/update`},
+  best:`report`, fix:`onelogin`,
+  flag:`A deadline, a penalty and a link, all pointing at changing where super gets paid.`,
+  openResult:`You logged in and "updated" the fund details. Three employees' super now goes somewhere else.`,
+  explanation:`Bookkeepers run super for dozens of clients, so a rejected-contribution notice is believable on any given Friday. Check the status in the clearing house you actually use, signed in the normal way.`,
+  source:`Scamwatch guidance on payment redirection scams` },
+
+{ id:`e18`, type:`malicious`, time:`4:50 pm`,
+  sender:`Alex Moretti`, address:`alexmoretti.hw@gmail.com`,
+  subject:`FY25 return final, can you check before I lodge?`,
+  body:`Hey, phone's nearly dead so sending from my personal. Can you have a quick look before I lodge? Want it done before the weekend.\n\nA`,
+  link:{label:`Open in Drive`, url:`https://drive-share-docs.com/f/FY25_Return_Final`},
+  best:`report`, fix:`onelogin`,
+  flag:`Alex has a firm address. This is a Gmail account wearing Alex's name, with a reason ready for why.`,
+  openResult:`The Drive link wanted your work login. Alex's phone isn't dead. Alex is at the pub.`,
+  explanation:`Staff names are on your website and LinkedIn. A free email account takes two minutes. The display name says Alex and the address says someone else, so call Alex or message him on the firm's chat.`,
+  source:`Scamwatch guidance on business email compromise` },
+
+{ id:`e19`, type:`malicious`, time:`4:33 pm`,
+  sender:`TPB Registrations`, address:`registrations@tpb-renewals.com`,
+  subject:`Renewal on hold: CPE log required by Monday`,
+  body:`Your registration renewal is on hold because your CPE log is incomplete.\n\nUpload it by 9 am Monday or your registration will lapse.`,
+  link:{label:`Upload CPE log`, url:`https://tpb-renewals.com/renewal/upload`},
+  best:`report`, fix:`onelogin`,
+  flag:`A lapse threat with a Monday deadline, sent on a Friday afternoon, from a domain the TPB doesn't use.`,
+  openResult:`The upload page asked for your TPB portal login and your registration number. You gave both.`,
+  explanation:`Your registration is the thing you can least afford to lose, which makes it a good lever. Anything about your registration can be checked by logging in to the TPB portal directly.`,
+  source:`TPB warnings about emails impersonating the TPB` },
+
+/* ---------- VERIFY (money or client data) ---------- */
+{ id:`v01`, type:`verify`, time:`4:31 pm`,
+  sender:`Accounts, Brightline IT`, address:`accounts@brightline-it.com.au`,
+  subject:`Updated bank details before you pay invoice #4471`,
+  body:`Hi,\n\nHeads up, we've moved banks. Can you update our details before you pay invoice #4471? Invoice attached as usual.\n\nBSB 062-123\nAccount 1098 7654\n\nQuestions? Call Dan on 0412 555 019.\n\nBrightline IT Accounts`,
+  attachment:`Invoice_4471.pdf`,
+  best:`verify`, fix:`callback`,
+  flag:`The address is genuinely Brightline's. That's the problem. The phone number in the signature is the only one they want you to call.`,
+  q:`Which number do you call?`,
+  options:[{t:`Dan on 0412 555 019, from the email`,ok:false},{t:`The number already in your supplier file`,ok:true}],
+  openResult:`You updated the bank details and paid #4471. Brightline still hasn't been paid.`,
+  wrongResult:`Dan on 0412 555 019 confirmed the new account. Dan doesn't work at Brightline.`,
+  explanation:`The email came from the supplier's real mailbox, which a criminal had taken over. The number in the signature was theirs. Insurers now ask whether you confirm bank changes on a pre-verified number already on file.`,
+  source:`Accounting-specific insurer questionnaire; Practice Protect webinar, 19 Aug 2026` },
+
+{ id:`v02`, type:`verify`, time:`4:30 pm`,
+  sender:`Sam Fraser`, address:`sam.fraser@${FIRM}`,
+  subject:`Quick one before pay run`,
+  body:`Hey, I've changed banks. Can you update my details before Monday's pay run?\n\nBSB 083-456\nAccount 5432 1098\n\nThanks!!`,
+  best:`verify`, fix:`callback`,
+  flag:`Pay details changing by email, at 4:30 on a Friday, three days before payday.`,
+  q:`How do you confirm it?`,
+  options:[{t:`Reply to the email and ask Sam to confirm`,ok:false},{t:`Call Sam on the number in the staff file, or catch him before he leaves`,ok:true}],
+  openResult:`Sam's pay goes to a new account on Monday. Sam won't see it.`,
+  wrongResult:`You replied. "Sam" confirmed straight away. Sam's mailbox has belonged to someone else since lunch.`,
+  explanation:`Payroll redirection often comes from a staff mailbox that's been taken over, timed for Friday afternoon. Replying asks the person who sent it. Confirm through a channel you already trust.`,
+  source:`Practice Protect webinar poll, 19 Aug 2026` },
+
+{ id:`v03`, type:`verify`, time:`4:28 pm`,
+  sender:`Mark Ellison`, address:`mark@ellisonjoinery.com.au`,
+  subject:`Do I need to pay this?`,
+  body:`Hi, this came in the post today. Looks official. Company review notice, reference numbers, barcode, $449 incl GST. Do I need to pay it? Photo attached.\n\nMark`,
+  attachment:`IMG_2207.jpg`,
+  best:`verify`, fix:`clients`,
+  flag:`Government-looking letterhead and a barcode. Read the fine print at the bottom.`,
+  q:`What do you tell Mark?`,
+  options:[{t:`Pay it, it looks official`,ok:false},{t:`Hold off. Check the fine print and what ASIC's own site says he owes`,ok:true}],
+  openResult:`You told Mark to pay. $449 went to a company that isn't ASIC.`,
+  wrongResult:`Mark paid $449 to a company that isn't ASIC.`,
+  explanation:`The fine print said it came from an independent third party and was "not a bill". It's a sales pitch dressed as a government fee. No email filter can catch a letter. A person can.`,
+  source:`` },
+
+{ id:`v04`, type:`verify`, time:`4:52 pm`,
+  sender:`Deb Halloran`, address:`deb@${FIRM}`, replyTo:`deb.halloran.office@gmail.com`,
+  subject:`Are you still in?`,
+  body:`Need a favour. Can you pay a deposit for a new client's software setup before 5? $8,450 to the account below. I'm stuck in a meeting till late so just email me when it's done.\n\nBSB 014-209\nAccount 2287 6610\n\nDeb`,
+  best:`verify`, fix:`callback`,
+  flag:`Look at the reply-to line. Your answer goes to Gmail, and Deb conveniently can't take a call.`,
+  q:`How do you check with Deb?`,
+  options:[{t:`Reply and ask her to confirm the account`,ok:false},{t:`Call or text Deb on the mobile in the staff list`,ok:true}],
+  openResult:`$8,450 sent. Deb was never in a meeting. She left at 3 for school pickup.`,
+  wrongResult:`"Deb" replied from Gmail within a minute: yes, pay it, thanks!`,
+  explanation:`When the reply-to differs from the sender, your reply goes to the scammer, who will cheerfully confirm. Partner-impersonation emails pick a moment when the partner is plausibly busy and the junior is plausibly eager.`,
+  source:`Scamwatch guidance on business email compromise` },
+
+{ id:`v05`, type:`verify`, time:`4:29 pm`,
+  sender:`Lisa Tran`, address:`lisa.tran@trandental.com.au`,
+  subject:`New account for my refund`,
+  body:`Hi, before you lodge can you put my new bank account on the return? I closed the old one.\n\nBSB 033-218\nAccount 4419 0672\n\nThanks so much, Lisa`,
+  best:`verify`, fix:`callback`,
+  flag:`Refund bank details changing by email, just before you lodge.`,
+  q:`How do you confirm it with Lisa?`,
+  options:[{t:`Reply to Lisa to double-check`,ok:false},{t:`Call Lisa on the number in your practice software`,ok:true}],
+  openResult:`You lodged with the new account. The refund lands somewhere Lisa has never heard of.`,
+  wrongResult:`"Lisa" confirmed by email. The refund is going to an account Lisa has never seen.`,
+  explanation:`Refund redirection goes after tax agents because you're the one keying in the account. If Lisa's email has been taken over, replying asks the scammer. The number in your practice file still rings Lisa.`,
+  source:`Scamwatch guidance on payment redirection scams` },
+
+{ id:`v06`, type:`verify`, time:`4:51 pm`,
+  sender:`ATO Debt Recovery`, address:`recovery@ato-debt-notices.com`,
+  subject:`Final notice: $12,480 outstanding, Ridley Family Trust`,
+  body:`This is a final notice for an outstanding debt of $12,480 for your client Ridley Family Trust.\n\nCall 02 8073 5521 today to arrange payment, or legal action will begin on Monday.`,
+  best:`verify`, fix:`callback`,
+  flag:`Legal action on a Monday, a phone number to ring today, and a sender domain that isn't ato.gov.au.`,
+  q:`How do you check the debt?`,
+  options:[{t:`Call 02 8073 5521 from the email`,ok:false},{t:`Check the trust's account in the agent portal, or use the number on ato.gov.au`,ok:true}],
+  openResult:`You rang the number and paid by card to "stop legal action". There was no debt.`,
+  wrongResult:`The person on 02 8073 5521 was very keen on a card payment today.`,
+  explanation:`A real ATO debt is visible in the client's account in your agent portal. Threats of legal action by Monday exist to stop you looking.`,
+  source:`ATO guidance on verifying ATO contact and reporting scams` },
+
+{ id:`v07`, type:`verify`, time:`4:32 pm`,
+  sender:`Hartley Conveyancing`, address:`settlements@hartleyconveyancing.com.au`,
+  subject:`Settlement Monday: ID for your client Ben Ruiz`,
+  body:`Hi,\n\nWe act for Ben Ruiz on his purchase, settling Monday. To finalise, please send copies of his passport, driver licence and most recent notice of assessment today.\n\nKind regards,\nSettlements team`,
+  best:`verify`, fix:`clients`,
+  flag:`A third party asking for your client's identity documents, with a deadline that rules out asking him.`,
+  q:`What do you do?`,
+  options:[{t:`Send them, settlement is Monday`,ok:false},{t:`Call Ben on the number you have and ask whether Hartley is acting for him`,ok:true}],
+  openResult:`Ben's passport, licence and notice of assessment are now with someone who isn't his conveyancer.`,
+  wrongResult:`You sent the documents. Ben has never heard of Hartley Conveyancing.`,
+  explanation:`A passport, a licence and a notice of assessment together are enough to open accounts in Ben's name. Ben decides who gets his documents, and a real conveyancer will ask him.`,
+  source:`TPB Code of Professional Conduct: confidentiality of client information` },
+
+{ id:`v08`, type:`verify`, time:`4:27 pm`,
+  sender:`Accounts, Kestrel Print`, address:`accounts@kestrelprint.com.au`,
+  subject:`Invoice 22089 for October`,
+  body:`Hi,\n\nPlease find attached your October invoice. Thanks for your business.\n\nKestrel Print`,
+  attachment:`Invoice_22089.pdf`,
+  preview:`Attachment preview:\nPay to BSB 112-879, Account 3390 4417\n(September invoice: BSB 063-010, Account 1182 9930)`,
+  best:`verify`, fix:`callback`,
+  flag:`The email says nothing has changed. The bank account on the PDF has.`,
+  q:`How do you check the new account?`,
+  options:[{t:`Reply to Kestrel and ask if they changed banks`,ok:false},{t:`Call Kestrel on the number in your supplier file`,ok:true}],
+  openResult:`Paid to the new account. Kestrel will be chasing the same invoice in 30 days.`,
+  wrongResult:`Kestrel's mailbox replied that yes, they'd changed banks. Kestrel's staff didn't write it.`,
+  explanation:`The quiet version of a bank-change scam doesn't announce itself. Somebody edits the PDF in a mailbox they've taken over and waits. Comparing the account against last month is the only thing that catches it.`,
+  source:`Scamwatch guidance on payment redirection scams` },
+
+/* ---------- LEGIT ---------- */
+{ id:`l01`, type:`legit`, time:`4:44 pm`,
+  sender:`Hannah Smith`, address:`hannah@smithfamilyfarms.com.au`,
+  subject:`Home office receipts?`,
+  body:`Hi,\n\nQuick one. Do I need to keep receipts for the desk and chair, or is the bank statement enough for the claim?\n\nThanks,\nHannah`,
+  best:`open`, fix:`report`,
+  flag:`Known client, same address as always, a question only a client would ask, and nothing to click or pay.`,
+  explanation:`No link, no attachment, no deadline. Reporting it would have been harmless. Deleting it left a client without an answer.`, source:`` },
+
+{ id:`l02`, type:`legit`, time:`4:41 pm`,
+  sender:`Alex Moretti`, address:`alex.moretti@${FIRM}`,
+  subject:`Nguyen trust file you asked for this morning`,
+  body:`As discussed this morning, the Nguyen family trust file is in the client folder in the usual place.\n\nShout if you want the prior year too.\n\nAlex`,
+  best:`open`, fix:`report`,
+  flag:`You asked for it this morning, it's from Alex's firm address, and it points you to the folder you already use.`,
+  explanation:`You requested it, it came from inside the firm, and it matches what you expected.`, source:`` },
+
+{ id:`l03`, type:`legit`, time:`4:39 pm`,
+  sender:`Michael Osei`, address:`michael@oseiconstructions.com.au`,
+  subject:`Re: FY26 engagement letter`,
+  body:`Signed copy attached. Sorry it took a while, the printer at the yard died.\n\nMichael\n\n> On Wed, you wrote:\n> Hi Michael, please find your FY26 engagement letter attached...`,
+  attachment:`Engagement_Letter_FY26_signed.pdf`,
+  best:`open`, fix:`report`,
+  flag:`A reply in a thread you started on Wednesday, from the client you sent it to, with the PDF you were waiting on.`,
+  explanation:`Attachments aren't bad by themselves. This one is a PDF you asked for, inside your own email thread, from the right address.`, source:`` },
+
+{ id:`l04`, type:`legit`, time:`4:46 pm`,
+  sender:`Ana Kowalski`, address:`ana@kowalskiflorist.com.au`,
+  subject:`Re: missing receipts for March`,
+  body:`Found them in the van! Two photos attached, the Bunnings one's a bit crumpled.\n\nAna`,
+  attachment:`IMG_4410.jpg, IMG_4411.jpg`,
+  best:`open`, fix:`report`,
+  flag:`You asked for these. They're photos, not a zip or a web page, and the address matches every other email from Ana.`,
+  explanation:`A reply you were expecting, with the file types you'd expect. Deleting it would have meant chasing Ana again on Monday.`, source:`` },
+
+{ id:`l05`, type:`legit`, time:`4:48 pm`,
+  sender:`Raj Patel`, address:`raj@patelpharmacy.com.au`,
+  subject:`Can we move Tuesday to Wednesday?`,
+  body:`Hi, something's come up at the shop Tuesday. Any chance we can do Wednesday same time? If not, no stress.\n\nRaj`,
+  best:`open`, fix:`report`,
+  flag:`A regular client, an ordinary request, no link, no money, no rush.`,
+  explanation:`Most of your inbox looks like this, which is the point. Treating every client as a suspect wastes the attention you need for the six emails that deserve it.`, source:`` },
+
+{ id:`l06`, type:`legit`, time:`4:43 pm`,
+  sender:`Sam Fraser`, address:`sam.fraser@${FIRM}`,
+  subject:`Patel BAS ready for review`,
+  body:`It's in the Patel folder. No rush, Monday's fine.\n\nSam`,
+  best:`open`, fix:`report`,
+  flag:`Sam's firm address, nothing to click, and it tells you to wait until Monday. Scammers never say that.`,
+  explanation:`Nothing in it asks you to act today, sign in or move money.`, source:`` },
+
+{ id:`l07`, type:`legit`, time:`4:45 pm`,
+  sender:`Halloran Webb Client Portal`, address:`portal@${FIRM}`,
+  subject:`Raj Patel uploaded 4 documents`,
+  body:`Raj Patel uploaded 4 new documents to his client folder.`,
+  link:{label:`View in portal`, url:`https://portal.${FIRM}/clients/patel/uploads`},
+  best:`open`, fix:`clients`,
+  flag:`The link goes to your firm's own portal on your firm's own domain, and you asked Raj to upload them there.`,
+  explanation:`Links aren't automatically bad. This one goes where you'd expect, from the system you set up for exactly this.`, source:`` },
+
+{ id:`l08`, type:`legit`, time:`4:38 pm`,
+  sender:`Careers`, address:`careers@${FIRM}`,
+  subject:`New application: Graduate Accountant`,
+  body:`A new application has been received through your careers page.\n\nLog in to the recruitment system to review it. Applications are never sent by email.`,
+  best:`open`, fix:`report`,
+  flag:`From your own careers system, with no link and no attachment. It tells you to log in where you always do.`,
+  explanation:`Compare it with the emailed CV scams. This is what the safe version of a job application looks like.`, source:`` },
+
+{ id:`l09`, type:`legit`, time:`4:53 pm`,
+  sender:`Deb Halloran`, address:`deb@${FIRM}`,
+  subject:`Drinks?`,
+  body:`Heading to the Royal at 5:30 if anyone's keen. Bring Sam, he owes me a lemonade.\n\nD`,
+  best:`open`, fix:`report`,
+  flag:`Deb's real address, no different reply-to, and nothing to click or pay.`,
+  explanation:`Same partner, same address as the scam version. The difference is there's no reply-to swap and nothing to pay.`, source:`` }
+];
+
+const DECISIONS = [
+{ id:`dA`, q:`A colleague messages you: "I pasted the Nguyen family trust deed into my personal ChatGPT to summarise it. Can I send the summary to the client?"`,
+  safe:`Stop. Check the firm's AI policy and whether the client agreed, then redo it in a tool the firm controls.`,
+  unsafe:`Send it, it saved an hour.`, fix:`ai`,
+  explanation:`TPB(GS) 55/2026 says practitioners must get each client's permission before giving their information to a third party, which can include typing it into AI tools. The practitioner stays responsible for the output.`,
+  source:`TPB(GS) 55/2026 (22 Jul 2026)` },
+{ id:`dB`, q:`Your bookkeeper finishes today. What closes her access?`,
+  safe:`Remove her from every connected app, and check for shared logins and personal AI accounts holding client data.`,
+  unsafe:`Reset her email password.`, fix:`offboard`,
+  explanation:`A password reset closes one door. Firms run a lot of connected apps, and some client data may sit in accounts the firm never knew existed.`,
+  source:`Practice Protect x Nylon webinar, 16 Sep 2026` },
+{ id:`dC`, q:`Your new offshore contractor asks for the Xero login so she can start Monday.`,
+  safe:`Give her her own login, limited to what the role needs and where she works from.`,
+  unsafe:`Email her the shared login.`, fix:`ownlogin`,
+  explanation:`A shared login hands over everything behind it, wipes out the record of who did what, and keeps working after the engagement ends.`,
+  source:`Practice Protect blog draft, "How much access does your contractor really need?"` },
+{ id:`dD`, q:`You're packing up. Your phone buzzes with a sign-in approval request. Then another. Then four more.`,
+  safe:`Deny every one and tell whoever runs your IT tonight. Someone has your password.`,
+  unsafe:`Approve one so it stops.`, fix:`location`,
+  explanation:`Repeated prompts mean someone already has your password and is betting you'll tap yes to make the buzzing stop. One approval lets them in.`,
+  source:`ASD guidance on multi-factor authentication` },
+{ id:`dE`, q:`Sam wants to finish the Patel BAS on his personal laptop at a cafe tomorrow morning.`,
+  safe:`Only on a firm device, or it waits until Monday.`,
+  unsafe:`Fine, it's only one BAS.`, fix:`devices`,
+  explanation:`A personal laptop has whatever the family installed on it. If client files open there, they open anywhere someone has Sam's password.`,
+  source:`Privacy Act 1988, Australian Privacy Principle 11 (security of personal information)` },
+{ id:`dF`, q:`A caller says he's from your IT provider. There's a problem with your mailbox and he needs you to install a support tool so he can fix it before the weekend.`,
+  safe:`Hang up and call your IT provider on the number you already have.`,
+  unsafe:`Install it. He knew your provider's name.`, fix:`devices`,
+  explanation:`Your IT provider's name is probably on your website or someone's LinkedIn. A remote support tool hands your whole screen to whoever is on the other end.`,
+  source:`Scamwatch guidance on remote access scams` },
+{ id:`dG`, q:`A new client wants to email you a photo of her passport and her TFN.`,
+  safe:`Send her a secure upload link from your client portal.`,
+  unsafe:`Sure, just email them through.`, fix:`clients`,
+  explanation:`An email sits in two inboxes, two sets of backups and every device either of you has signed in on. TFNs come with legal security obligations.`,
+  source:`Privacy (Tax File Number) Rule 2015` },
+{ id:`dH`, q:`You find the team's logins for the agent portal, Xero and the bank in a spreadsheet called "logins FINAL v2".`,
+  safe:`Move everyone to their own logins with MFA and delete the spreadsheet.`,
+  unsafe:`Password-protect the spreadsheet.`, fix:`ownlogin`,
+  explanation:`The first thing an attacker does inside a mailbox is search for "password". Shared logins also mean nobody can say who lodged what.`,
+  source:`ASD Essential Eight: multi-factor authentication and restricting administrative privileges` },
+{ id:`dI`, q:`Alex left the work phone in an Uber. It has email, the authenticator app and the client WhatsApp group on it.`,
+  safe:`Report it now so its access is cut off tonight.`,
+  unsafe:`Leave it till Monday. Uber might return it.`, fix:`offboard`,
+  explanation:`A weekend is about 60 hours. If cutting off one phone means ringing three providers, most firms wait, and the phone stays signed in the whole time.`,
+  source:`ASD small business guidance on lost and stolen devices` }
+];
+
+/* Monday actions. Each one names the control, never a product. */
+const MONDAY = {
+  report:{t:`Make reporting the easy option`, d:`Give everyone one obvious way to report a suspicious email, and say out loud that a false alarm is fine. Thank the first person who reports something that turns out to be nothing.`},
+  callback:{t:`Write down the call-back rule`, d:`One page, stuck near whoever pays bills and runs payroll.`},
+  onelogin:{t:`Count your logins`, d:`List every separate login your team uses to reach client data. Each one is a password someone can phish on a fake page. The fewer there are, and the more of them sit behind one company login with MFA, the fewer pages there are to fake.`},
+  offboard:{t:`Time your next leaver`, d:`When someone leaves, time how long it takes to remove them from every app. If the honest answer is "we'd have to check", that's the job.`},
+  devices:{t:`Decide which devices can open client files`, d:`If a personal phone or the family laptop can open client data, so can anyone who gets a password, on any device they like.`},
+  location:{t:`Ask where your sign-ins come from`, d:`Find out whether your firm can see, and block, a sign-in from a country nobody on your team works in. Stolen logins usually get used a long way from the person they belong to.`},
+  ai:{t:`Write a one-page AI policy`, d:`Which tools are allowed, what client information can go into them, and when you need the client's permission. Your staff are using AI already, with or without the page.`},
+  ownlogin:{t:`Retire shared logins`, d:`Everyone gets their own, limited to the clients and apps their role needs. Then you can see who did what, and switch off one person without locking out the rest.`},
+  clients:{t:`Tell clients how you'll contact them`, d:`A line in the engagement letter about how you will and won't ask for money or documents, plus a secure upload link, saves a lot of "is this really from you?"`},
+  attachments:{t:`Block the attachment types nobody needs`, d:`Ask whoever runs your IT to block .html, .htm and .iso attachments from outside the firm, and hold .zip files from strangers for a check.`}
+};
+
+/* ============ RANDOM / DECK ============ */
+const ALPH = `ABCDEFGHJKLMNPQRSTUVWXYZ23456789`;
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+function codeToSeed(c){let s=0;for(const ch of c){const i=ALPH.indexOf(ch);if(i<0)return null;s=s*32+i}return s}
+function seedToCode(s){let c=``;for(let i=0;i<6;i++){c=ALPH[s%32]+c;s=Math.floor(s/32)}return c}
+function shuffleR(a,r){for(let i=a.length-1;i>0;i--){const j=Math.floor(r()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+
+function deckFromSeed(seed){
+  const r=mulberry32(seed);
+  const of=t=>shuffleR(EMAILS.filter(e=>e.type===t),r);
+  const nLeg=2+(r()<.5?1:0), nVer=2+(r()<.5?1:0), nMal=12-nLeg-nVer;
+  const emails=shuffleR([...of(`malicious`).slice(0,nMal),...of(`verify`).slice(0,nVer),...of(`legit`).slice(0,nLeg)],r);
+  const decs=shuffleR([...DECISIONS],r).slice(0,3);
+  const deck=[];let d=0;
+  emails.forEach((e,i)=>{deck.push(e);if([3,7,10].includes(i))deck.push({...decs[d++],isDecision:true})});
+  return deck;
+}
+
+function loadSeen(){try{return JSON.parse(localStorage.getItem(`fi-seen`)||`[]`)}catch(e){return[]}}
+function saveSeen(ids){try{const s=new Set([...loadSeen(),...ids]);const all=EMAILS.length+DECISIONS.length;
+  localStorage.setItem(`fi-seen`,JSON.stringify(s.size>=all-6?ids:[...s]))}catch(e){}}
+
+/* Solo games: try 30 seeds and keep the one with the most cards this device hasn't seen. */
+function freshSeed(){
+  const seen=new Set(loadSeen());let best=null,bestN=-1;
+  for(let i=0;i<30;i++){const s=Math.floor(Math.random()*Math.pow(32,6));
+    const n=deckFromSeed(s).filter(c=>!seen.has(c.id)).length;if(n>bestN){bestN=n;best=s}}
+  return best;
+}
+
+/* ============ ANALYTICS (wire window.FI_TRACK to your tool; nothing sends without consent) ============ */
+function trackEvent(name,props){try{if(window.FI_CONSENT===true&&typeof window.FI_TRACK===`function`)window.FI_TRACK(name,props||{})}catch(e){}}
+
+/* ============ STATE ============ */
+let S;
+function freshState(){return{score:0,hearts:3,firms:0,i:0,cards:[],results:[],team:``,relaxed:false,
+  secs:0,max:120,timer:null,hints:0,over:false,verifyOpen:false,hintShown:false,code:``,busy:false}}
+S=freshState();
+
+const $=id=>document.getElementById(id);
+const announce=t=>{$(`live`).textContent=``;setTimeout(()=>$(`live`).textContent=t,30)};
+
+/* ============ CLOCK ============ */
+function clockText(sec){
+  if(sec>=S.max)return`5:00:00 pm`;
+  const gameSec=Math.floor(sec/S.max*13*60), m=47+Math.floor(gameSec/60), s=gameSec%60;
+  return`4:${String(m).padStart(2,`0`)}:${String(s).padStart(2,`0`)} pm`;
+}
+function startClock(){
+  if(S.relaxed){$(`clock`).textContent=`No timer`;return}
+  $(`clock`).textContent=clockText(0);
+  S.timer=setInterval(()=>{tick(1)},1000);
+}
+function tick(n){
+  S.secs=Math.min(S.secs+n,S.max);
+  $(`clock`).textContent=clockText(S.secs);
+  const left=S.max-S.secs;
+  if(left<=10)$(`clock`).classList.add(`urgent`);
+  if(left===60)announce(`One minute until five.`);
+  if(left===30)announce(`Thirty seconds until five.`);
+  if(left===10)announce(`Ten seconds until five.`);
+  if(S.secs>=S.max)endGame();
+}
+
+/* ============ RENDER ============ */
+function stats(){
+  $(`score`).textContent=S.score;$(`firms`).textContent=S.firms;
+  $(`progress`).textContent=`${Math.min(S.i+1,S.cards.length)} of ${S.cards.length}`;
+  $(`hearts`).innerHTML=[0,1,2].map(i=>`<span class="heart ${i>=S.hearts?`lost`:``}" aria-hidden="true">♥</span>`).join(``);
+  $(`hearts`).setAttribute(`aria-label`,`${S.hearts} of 3 client trust`);
+}
+
+function render(){
+  if(S.over)return;
+  if(S.i>=S.cards.length){endGame();return}
+  const c=S.cards[S.i];S.verifyOpen=false;S.hintShown=false;S.busy=false;stats();
+  const area=$(`cardArea`);area.scrollTop=0;
+  trackEvent(`card_shown`,{card_id:c.id});
+  if(c.isDecision){
+    $(`actionBar`).style.display=`none`;
+    const safeFirst=Math.random()<.5;
+    const opts=safeFirst?[[c.safe,true],[c.unsafe,false]]:[[c.unsafe,false],[c.safe,true]];
+    area.innerHTML=`<div class="decision" role="group" aria-labelledby="dq">
+      <div class="decision-kicker">Before you go home</div>
+      <div class="decision-q" id="dq">${c.q}</div>
+      ${opts.map((o,k)=>`<button class="choice" data-safe="${o[1]}"><span class="k">${k+1}</span><span>${o[0]}</span></button>`).join(``)}
+    </div>`;
+    area.querySelectorAll(`.choice`).forEach(b=>b.onclick=()=>decide(c,b.dataset.safe===`true`));
+    area.querySelector(`.choice`).focus({preventScroll:true});
+    announce(`Decision. ${c.q}`);
+    return;
+  }
+  $(`actionBar`).style.display=`block`;
+  let extra=``;
+  if(c.preview)extra+=`<span class="preview-line">${c.preview}</span>`;
+  if(c.attachment)extra+=`<span class="attach">📎 ${c.attachment}</span>`;
+  if(c.link)extra+=`<div class="linkbox"><span class="fake-btn">${c.link.label}</span><div class="link-dest">Link goes to: ${c.link.url}</div></div>`;
+  if(c.qr)extra+=`<div class="qr" role="img" aria-label="QR code"></div>`;
+  area.innerHTML=`<article class="mail" aria-label="Email from ${c.sender}">
+    <div class="mail-head">
+      <div class="mail-top"><div class="sender">${c.sender}</div><div class="received">${c.time}</div></div>
+      <div class="addr">&lt;${c.address}&gt;</div>
+      ${c.replyTo?`<div class="meta">Reply-to: <span>${c.replyTo}</span></div>`:``}
+      <div class="meta">To: <span>you@${FIRM}</span></div>
+      <div class="subject">${c.subject}</div>
+    </div>
+    <div class="mail-body">${c.body}${extra}<div class="flag ${c.type===`legit`?`safe`:``}" id="flag"><b>${c.type===`legit`?`What checks out: `:`Look at this: `}</b>${c.flag}</div></div>
+  </article>
+  ${c.q?`<div class="verify" id="verify" role="group" aria-labelledby="vq"><h3 id="vq">${c.q}</h3>
+    ${c.options.map((o,k)=>`<button class="choice" data-ok="${o.ok}"><span class="k">${k+1}</span><span>${o.t}</span></button>`).join(``)}</div>`:``}`;
+  const v=$(`verify`);
+  if(v)v.querySelectorAll(`.choice`).forEach(b=>b.onclick=()=>verifyChoice(c,b.dataset.ok===`true`));
+  announce(`New email from ${c.sender}, ${c.address}. Subject: ${c.subject}`);
+}
+
+/* ============ SCORING ============ */
+function outcome(c,a,ok){
+  const first=c.sender.split(` `)[0];
+  if(c.type===`malicious`)return{
+    open:{p:-150,h:true,m:c.openResult,k:`bad`},
+    delete:{p:40,m:`Deleted. You're safe. The next firm on the list gets the same email on Monday.`,k:``},
+    report:{p:100,f:true,m:`Reported. One more firm warned.`,k:`good`},
+    verify:{p:60,m:`You checked before touching it. Safe, but a report would have warned others too.`,k:``}}[a];
+  if(c.type===`verify`){
+    if(a===`verify`)return ok?{p:100,m:`Checked on a number you already trusted. That's the catch.`,k:`good`}:{p:-100,h:true,m:c.wrongResult,k:`bad`};
+    return{open:{p:-150,h:true,m:c.openResult,k:`bad`},
+      delete:{p:20,m:`Deleted. If it was real, someone's still waiting on you. Checking would have told you.`,k:``},
+      report:{p:60,m:`Reported. Safe, though a call would have settled it.`,k:``}}[a];
+  }
+  return{open:{p:50,m:`It was real. ${first} gets an answer.`,k:`good`},
+    delete:{p:-30,m:`That was real. ${first} is still waiting.`,k:`bad`},
+    report:{p:10,m:`A false alarm. A minute lost, no harm done.`,k:``},
+    verify:{p:20,m:`It was real. Checking cost you time and nothing else.`,k:``}}[a];
+}
+function isRight(c,a,ok){return a===c.best&&!(a===`verify`&&ok===false)}
+
+function act(a){
+  if(S.over||S.verifyOpen||S.busy)return;
+  const c=S.cards[S.i];if(!c||c.isDecision)return;
+  if(a===`verify`&&c.q){$(`verify`).classList.add(`open`);S.verifyOpen=true;
+    $(`verify`).querySelector(`.choice`).focus({preventScroll:true});$(`verify`).scrollIntoView({block:`nearest`});
+    announce(`${c.q} Option 1: ${c.options[0].t}. Option 2: ${c.options[1].t}.`);return}
+  apply(c,a,undefined);
+}
+function verifyChoice(c,ok){if(S.busy)return;S.verifyOpen=false;
+  trackEvent(`verify_choice`,{card_id:c.id,correct:ok});apply(c,`verify`,ok)}
+
+function apply(c,a,ok){
+  S.busy=true;
+  const o=outcome(c,a,ok);
+  S.score+=o.p;if(o.f)S.firms++;if(o.h)S.hearts--;
+  S.results.push({c,a,ok,right:isRight(c,a,ok),hint:S.hintShown});
+  trackEvent(`choice_made`,{card_id:c.id,action:a,correct:isRight(c,a,ok),used_take_a_second:S.hintShown});
+  toast(o.m,o.k);stats();
+  if(S.hearts<=0){setTimeout(endGame,1800);return}
+  S.i++;setTimeout(render,1300);
+}
+function decide(c,safe){
+  if(S.busy)return;S.busy=true;
+  S.score+=safe?100:-100;if(!safe)S.hearts--;
+  S.results.push({c,a:safe?`safe`:`unsafe`,right:safe});
+  trackEvent(`choice_made`,{card_id:c.id,action:safe?`safe`:`unsafe`,correct:safe});
+  toast(safe?`Right call.`:`That one cost you a heart.`,safe?`good`:`bad`);stats();
+  if(S.hearts<=0){setTimeout(endGame,1500);return}
+  S.i++;setTimeout(render,1000);
+}
+function takeSecond(){
+  if(S.over||S.busy)return;const c=S.cards[S.i];if(!c||c.isDecision||S.hintShown)return;
+  $(`flag`).classList.add(`visible`);S.hintShown=true;S.hints++;
+  if(!S.relaxed)tick(1);
+  announce(c.flag);
+}
+let toastT;
+function toast(t,k){const el=$(`toast`);el.textContent=t;el.className=`toast show ${k||``}`;clearTimeout(toastT);toastT=setTimeout(()=>el.classList.remove(`show`),2400)}
+
+/* ============ END ============ */
+function opinion(score,hearts){
+  if(hearts<=0)return{n:`Adverse opinion`,j:`The auditors would like a word.`};
+  if(score>=1000&&hearts>=2)return{n:`Unqualified opinion`,j:`Clean audit. Go home.`};
+  if(score>=700)return{n:`Emphasis of matter`,j:`Signed off. There's a paragraph in there the partners will read twice.`};
+  if(score>=400)return{n:`Qualified opinion`,j:`You got through the afternoon, with exceptions noted.`};
+  return{n:`Adverse opinion`,j:`The auditors would like a word.`};
+}
+const ACTION_NAME={open:`Open`,delete:`Delete`,report:`Report`,verify:`Verify`};
+
+function endGame(){
+  if(S.over)return;S.over=true;clearInterval(S.timer);
+  const answered=new Set(S.results.map(r=>r.c.id));
+  S.cards.forEach(c=>{if(!answered.has(c.id))S.results.push({c,a:`unanswered`,right:false})});
+  saveSeen(S.cards.map(c=>c.id));
+  const op=opinion(S.score,S.hearts);
+  const scams=S.results.filter(r=>r.c.type===`malicious`&&r.a!==`unanswered`);
+  const reported=scams.filter(r=>r.a===`report`).length, deleted=scams.filter(r=>r.a===`delete`).length;
+  const misses=S.results.filter(r=>!r.right);
+  trackEvent(`game_end`,{opinion:op.n,score_bucket:Math.floor(S.score/200)*200,firms_warned:S.firms,hearts:S.hearts,take_a_second_used:S.hints,team_round:!!S.code});
+
+  // Monday list: missed controls first, by frequency, then fill from cards played
+  const count={};misses.forEach(r=>{if(r.c.type!==`legit`&&r.c.fix)count[r.c.fix]=(count[r.c.fix]||0)+1});
+  let keys=Object.keys(count).sort((a,b)=>count[b]-count[a]);
+  S.cards.forEach(c=>{if(c.type!==`legit`&&c.fix&&!keys.includes(c.fix))keys.push(c.fix)});
+  keys=keys.slice(0,3);
+  const mondayIntro=misses.filter(r=>r.c.type!==`legit`).length
+    ?`Picked from what got past you this round. None of these need a budget meeting.`
+    :`Not much got past you. These are the gaps the emails you played were built to find.`;
+
+  let reportLine=``;
+  if(scams.length){
+    reportLine=`You reported ${reported} of the ${scams.length} scams you answered`+(deleted?` and deleted ${deleted}.`:`.`)+
+      ` A deleted scam leaves your inbox and keeps going to every other firm on the list. A reported one can get blocked before it reaches them.`;
+  }
+
+  const missHtml=misses.length?`<h3 class="misses-h">What got past you</h3>`+misses.map(r=>{
+    const c=r.c, title=c.isDecision?c.q:c.subject;
+    const chose=r.a===`unanswered`?`Still in the inbox at 5 pm`:c.isDecision?`You picked: ${c.unsafe}`:
+      `You chose ${ACTION_NAME[r.a]}${r.a===`verify`&&r.ok===false?`, then called the wrong number`:``}. Best was ${ACTION_NAME[c.best]}.`;
+    return`<div class="miss"><div class="miss-sub">${title}</div><div class="miss-act">${chose}</div>
+      ${c.flag&&c.type!==`legit`?`<div class="miss-flag">${c.flag}</div>`:``}
+      <div class="miss-exp">${c.explanation}</div>${c.source?`<div class="miss-src">Source: ${c.source}</div>`:``}</div>`}).join(``):``;
+
+  $(`gameScreen`).classList.remove(`active`);$(`endScreen`).classList.add(`active`);
+  $(`endContent`).innerHTML=`
+    <div class="verdict"><div class="verdict-small">5:00 pm. Your audit opinion</div><h2>${op.n}</h2><div class="verdict-joke">${op.j}</div></div>
+    <div class="figs">
+      <div class="fig"><b>${S.score}</b><span>points</span></div>
+      <div class="fig"><b>${S.hearts} of 3</b><span>client trust left</span></div>
+      <div class="fig"><b>${S.firms}</b><span>firms warned</span></div>
+    </div>
+    ${reportLine?`<p class="report-line">${reportLine}</p>`:``}
+    <div class="monday"><h3>Three things for Monday</h3><div class="sub">${mondayIntro}</div>
+      <ol>${keys.map(k=>`<li><b>${MONDAY[k].t}</b>${MONDAY[k].d}</li>`).join(``)}</ol></div>
+    ${missHtml}
+    <div class="end-actions">
+      <div class="challenge"><p>Play this exact round with your team. Same twelve emails, same order. Round code <b style="font-family:var(--mono);letter-spacing:2px">${S.code}</b></p>
+        <div class="row"><button class="btn-quiet" id="copyChallenge">Copy the challenge</button>
+        <button class="btn-quiet" id="shareL">Share image (LinkedIn)</button>
+        <button class="btn-quiet" id="shareI">Share image (Instagram)</button></div></div>
+      <button class="btn-play" id="again">Play a new round</button>
+      <a class="cta" id="ctaChecklist" href="https://practiceprotect.com/the-firm-owners-security-checklist-2026/" target="_blank" rel="noopener">Get The Firm Owner's Security Checklist 2026</a>
+      <a class="cta" id="ctaConsult" href="https://practiceprotect.com/call/" target="_blank" rel="noopener">Book a security consultation</a>
+    </div>
+    <div class="credit">A Practice Protect game for Cyber Security Action Month 2026. Names, firms and domains are fictional.</div>`;
+  $(`again`).onclick=()=>{S=freshState();$(`endScreen`).classList.remove(`active`);$(`startScreen`).classList.add(`active`);$(`clock`).classList.remove(`urgent`);$(`codeInput`).value=``;$(`codeShownWrap`).hidden=true;$(`btnPlay`).focus()};
+  $(`copyChallenge`).onclick=()=>{
+    const t=`I got ${/^[AEIOU]/.test(op.n)?`an`:`a`} ${op.n} in The Friday Inbox and warned ${S.firms} firm${S.firms===1?``:`s`}. Play my round with code ${S.code} and see if you do better.`;
+    (navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast(`Copied. Paste it into your team chat.`,`good`)).catch(()=>toast(`Round code: ${S.code}`,``))};
+  $(`shareL`).onclick=()=>shareImage(1200,627,op);$(`shareI`).onclick=()=>shareImage(1080,1350,op);
+  $(`endContent`).querySelector(`h2`).setAttribute(`tabindex`,`-1`);$(`endContent`).querySelector(`h2`).focus();
+  announce(`Five o'clock. ${op.n}. ${S.score} points. ${S.firms} firms warned.`);
+}
+
+/* ============ SHARE IMAGE ============ */
+function shareImage(w,h,op){
+  const cv=$(`shareCanvas`);cv.width=w;cv.height=h;const x=cv.getContext(`2d`);
+  const f=`'DM Sans', -apple-system, sans-serif`, pad=Math.round(w*.08);
+  x.fillStyle=`#F5F6F8`;x.fillRect(0,0,w,h);
+  x.fillStyle=`#1A1D23`;x.fillRect(0,0,w,Math.round(h*.12));
+  x.fillStyle=`#FFFFFF`;x.font=`500 ${Math.round(w*.024)}px ${f}`;x.textBaseline=`middle`;
+  x.fillText(`Friday, 5:00 pm`,pad,Math.round(h*.06));
+  x.textBaseline=`alphabetic`;x.fillStyle=`#80869A`;x.font=`500 ${Math.round(w*.028)}px ${f}`;
+  const top=h>w?h*.32:h*.3;
+  x.fillText(`The Friday Inbox`,pad,top);
+  x.fillStyle=`#1A1D23`;x.font=`700 ${Math.round(w*(h>w?.085:.064))}px ${f}`;
+  x.fillText(op.n,pad,top+w*(h>w?.12:.08));
+  x.fillStyle=`#525866`;x.font=`400 ${Math.round(w*.03)}px ${f}`;
+  const line2=`${S.firms} firm${S.firms===1?``:`s`} warned. ${S.hearts} of 3 client trust left.`;
+  x.fillText(line2,pad,top+w*(h>w?.2:.135));
+  if(S.team){x.fillText(S.team,pad,top+w*(h>w?.26:.18))}
+  x.fillStyle=`#0A8F83`;x.font=`600 ${Math.round(w*.03)}px ${f}`;
+  x.fillText(`Take a second. Stay secure.`,pad,h-pad*1.4);
+  x.fillStyle=`#80869A`;x.font=`400 ${Math.round(w*.02)}px ${f}`;
+  x.fillText(`Cyber Security Action Month 2026`,pad,h-pad*.8);
+  cv.toBlob(async b=>{
+    const file=new File([b],`friday-inbox-${w}x${h}.png`,{type:`image/png`});
+    try{if(navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],text:`I got ${op.n} in The Friday Inbox.`});return}}catch(e){}
+    toast(`Share image ready. Long-press or right-click it to save.`,``);
+    const url=URL.createObjectURL(b);const w2=window.open(url,`_blank`);if(!w2)toast(`Your browser blocked the image. Try the other share button or a different browser.`,`bad`);
+  },`image/png`);
+}
+
+/* ============ START ============ */
+function startGame(){
+  const typed=$(`codeInput`).value.trim().toUpperCase();
+  let seed=null;
+  if(typed){seed=codeToSeed(typed);if(typed.length!==6||seed===null){toast(`That code doesn't look right. Codes are 6 letters and numbers.`,`bad`);$(`codeInput`).focus();return}}
+  S=freshState();
+  S.team=$(`teamInput`).value.trim();S.relaxed=$(`relaxedMode`).checked;
+  if(seed===null)seed=freshSeed();
+  S.code=seedToCode(seed);S.cards=deckFromSeed(seed);
+  $(`startScreen`).classList.remove(`active`);$(`gameScreen`).classList.add(`active`);$(`clock`).classList.remove(`urgent`);
+  trackEvent(`game_start`,{team_round:!!typed,relaxed:S.relaxed});
+  render();startClock();
+}
+
+$(`btnPlay`).onclick=startGame;
+$(`btnNewRound`).onclick=()=>{const c=seedToCode(Math.floor(Math.random()*Math.pow(32,6)));$(`codeInput`).value=c;$(`codeShown`).textContent=c;$(`codeShownWrap`).hidden=false;announce(`Round code ${c.split(``).join(` `)}`)};
+$(`btnHowTo`).onclick=()=>{$(`howTo`).classList.add(`open`);$(`closeHowTo`).focus()};
+$(`closeHowTo`).onclick=()=>{$(`howTo`).classList.remove(`open`);$(`btnHowTo`).focus()};
+$(`howTo`).onclick=e=>{if(e.target===e.currentTarget){$(`howTo`).classList.remove(`open`);$(`btnHowTo`).focus()}};
+document.querySelectorAll(`.act`).forEach(b=>b.onclick=()=>act(b.dataset.action));
+$(`tasBtn`).onclick=takeSecond;
+
+/* Team code from the page address, for when this is hosted on the website (?round=K4XP2M) */
+try{const r=new URLSearchParams(location.search).get(`round`);if(r){$(`codeInput`).value=r.toUpperCase();$(`teamDetails`).open=true}}catch(e){}
+
+document.addEventListener(`keydown`,e=>{
+  if($(`howTo`).classList.contains(`open`)){if(e.key===`Escape`){$(`howTo`).classList.remove(`open`);$(`btnHowTo`).focus()}return}
+  if(!$(`gameScreen`).classList.contains(`active`)||S.over)return;
+  if(e.target.tagName===`INPUT`||e.metaKey||e.ctrlKey||e.altKey)return;
+  const k=e.key.toLowerCase(), c=S.cards[S.i];
+  if(c&&(c.isDecision||S.verifyOpen)&&(k===`1`||k===`2`)){
+    const box=c.isDecision?$(`cardArea`):$(`verify`);const btn=box.querySelectorAll(`.choice`)[+k-1];if(btn){e.preventDefault();btn.click()}return}
+  const map={o:`open`,d:`delete`,r:`report`,v:`verify`};
+  if(map[k]){e.preventDefault();act(map[k])}
+  if(k===`t`){e.preventDefault();takeSecond()}
+});
+</script>
+</body>
+</html>
